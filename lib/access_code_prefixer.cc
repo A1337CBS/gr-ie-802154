@@ -53,7 +53,13 @@ class access_code_prefixer_impl : public access_code_prefixer {
 	}
 
 	void set_len(pmt::pmt_t len) {
-
+		int psdu_length2 = pmt::blob_length(pmt::cdr(len));
+		std::cout << "LEN bytes" << psdu_length2 << std::endl;
+		const char *length = static_cast<const char*>(pmt::blob_data(pmt::cdr(len)));
+		if (psdu_length2 == 1) { // accept single byte message only
+			d_pad = (length[0]-48)*((unsigned int)d_delay_sec);
+		}
+		std::cout << "LEN value" << d_pad << std::endl;
 	}
 
 	void make_frame (pmt::pmt_t msg) {
