@@ -57,7 +57,7 @@ class access_code_prefixer_impl : public access_code_prefixer {
 		std::cout << "LEN bytes" << psdu_length2 << std::endl;
 		const char *length = static_cast<const char*>(pmt::blob_data(pmt::cdr(len)));
 		if (psdu_length2 == 1) { // accept single byte message only
-			d_pad = (length[0]-48);
+			d_pad = length[0];
 		}
 		std::cout << "LEN value" << d_pad << std::endl;
 	}
